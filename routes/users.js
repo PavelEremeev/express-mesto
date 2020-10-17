@@ -2,18 +2,19 @@ const router = require('express').Router();
 const path = require('path');
 const readFile = require('../utils/read-file');
 
-const jsonDataPath = path.join(__dirname, '..', 'data', 'users.json');
+const jsonUsersDataPath = path.join(__dirname, '..', 'data', 'users.json');
 
 router.get('/users', (req, res) => {
-  readFile(jsonDataPath)
+  readFile(jsonUsersDataPath)
     .then(data => res.send(data));
 });
 
-router.get('/users/:id', (req, res) => {
-  const { id } = req.params;
-  readFile(jsonDataPath)
+
+router.get('/users/:_id', (req, res) => {
+  const { _id } = req.params;
+  readFile(jsonUsersDataPath)
     .then(data => {
-      const userToFind = data.find((user) => user.id === id);
+      const userToFind = data.find((user) => user._id === _id);
       return userToFind;
     })
     .then((user) => {
@@ -24,4 +25,6 @@ router.get('/users/:id', (req, res) => {
     }).catch(err => res.status(500).send({ message: `Ошибка чтения файла:${err}` }));
 });
 
-module.exports = { router };
+
+
+module.exports =  router ;
