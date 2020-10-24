@@ -21,7 +21,7 @@ router.get('/users/:_id', (req, res) => {
       if (!user) {
         return res.status(404).send({ message: 'Нет пользователя с таким id' });
       }
-      res.send(user);
+      return res.send(user);
     }).catch(() => res.status(500).send({ message: 'Ошибка чтения файла' }));
 });
 
