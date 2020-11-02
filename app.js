@@ -11,7 +11,8 @@ const mongoDbUrl = 'mongodb://localhost:27017/mestodb';
 const mongoConnectionOptions = {
   useNewUrlParser: true,
   useCreateIndex: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useUnifiedTopology: true
 }
 
 mongoose.connect(mongoDbUrl, mongoConnectionOptions)

@@ -1,5 +1,5 @@
-const { Schema } = require('mongoose');
-const validator = require('../utils/validator')
+const { Schema, model } = require('mongoose');
+// const validator = require('../utils/validator')
 
 const userSchema = new Schema({
   name: {
@@ -14,12 +14,16 @@ const userSchema = new Schema({
     minlength: 8,
     maxlength: 30
   },
+  _id: {
+    type:String,
+    required:true
+  },
   avatar: {
     type: String,
     required: true,
-    validate: {
-      validator
-    }
+    // validate: {
+    //   validator
+    // }
   }
 })
 

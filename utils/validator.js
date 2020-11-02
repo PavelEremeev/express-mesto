@@ -4,4 +4,4 @@ const validator = { function(v) {
 },
 message: 'Введите ссылку!'
 }
-module.exports = {validator}
+module.exports = validator

@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const validator = require('../utils/validator')
 
 const cardSchema = new Schema({
@@ -11,9 +11,9 @@ const cardSchema = new Schema({
   link: {
     type: String,
     required: true,
-    validate: {
-      validator
-    }
+    // validate: {
+    //   validator
+    // }
   },
   owner: {
 
