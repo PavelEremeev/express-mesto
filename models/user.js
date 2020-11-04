@@ -14,10 +14,7 @@ const userSchema = new Schema({
     minlength: 8,
     maxlength: 30
   },
-  _id: {
-    type:String,
-    required:true
-  },
+
   avatar: {
     type: String,
     required: true,

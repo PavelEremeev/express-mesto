@@ -8,8 +8,16 @@ router.get('/users', (req, res) => {
   .catch(() => res.status(500).send({ message: 'Ошибка чтения файла' }));
 });
 
+router.post('/users', (req, res) => {
+  const { name, about, avatar } = req.body;
+
+  User.create({ name, about, avatar})
+  .then((user) => res.send(user))
+  .catch(err => res.status(500).send(err));
+});
+
 router.get('/users/:_id', (req, res) => {
-  User.findOne({_id: req.params._id})
+  User.findById(req.params._id)
     .then((user) => {
       if (!user) {
         return res.status(404).send({ message: 'Нет пользователя с таким id' });

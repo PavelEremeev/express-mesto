@@ -1,9 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const path = require('path');
-const usersRoutes = require('./routes/users.js');
-const cardsRoutes = require('./routes/cards.js');
+const usersRoutes = require('./routes/usersRouter.js');
+const cardsRoutes = require('./routes/cardsRouter.js');
 const unknownRoute = require('./routes/unknown.js');
+
 
 const app = express();
 const PORT = 3000;
@@ -14,6 +16,10 @@ const mongoConnectionOptions = {
   useFindAndModify: false,
   useUnifiedTopology: true
 }
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
 
 mongoose.connect(mongoDbUrl, mongoConnectionOptions)
 

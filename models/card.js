@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Mongoose } = require('mongoose');
 const validator = require('../utils/validator')
 
 const cardSchema = new Schema({
@@ -16,10 +16,13 @@ const cardSchema = new Schema({
     // }
   },
   owner: {
-
+    type: Schema.Types.ObjectId,
+    ref: 'user',
+    required: true
   },
   likes: {
-
+    type: [{type: Schema.Types.ObjectId, ref: 'user'}],
+    default: []
   },
   createdAt: {
     type: Date,
