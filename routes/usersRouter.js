@@ -1,13 +1,14 @@
 const router = require('express').Router();
 const User = require('../models/user')
 
-
+// Получение  всех юзеров
 router.get('/users', (req, res) => {
   User.find({})
   .then((data) => res.send(data))
   .catch(() => res.status(500).send({ message: 'Ошибка чтения файла' }));
 });
 
+// Создание нового юзера
 router.post('/users', (req, res) => {
   const { name, about, avatar } = req.body;
 
@@ -16,6 +17,8 @@ router.post('/users', (req, res) => {
   .catch(err => res.status(500).send(err));
 });
 
+
+// Получение определенного юзера
 router.get('/users/:_id', (req, res) => {
   User.findById(req.params._id)
     .then((user) => {

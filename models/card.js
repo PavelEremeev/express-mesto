@@ -1,4 +1,4 @@
-const { Schema, model, Mongoose } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const validator = require('../utils/validator')
 
 const cardSchema = new Schema({
