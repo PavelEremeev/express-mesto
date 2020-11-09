@@ -23,7 +23,14 @@ module.exports.createCard = (req, res) => {
   const { _id } = req.user
 Card.create({ name, link, owner: _id })
 .then((card) => res.send(card))
-.catch(err => res.status(500).send(err));
+.catch((err) => {
+  if (err.kind === undefined) {
+    return res.status(404).send({ message: err.message });
+  } if (err.kind === 'ObjectId') {
+    return res.status(400).send({ message: 'Нет карточки с таким id' });
+  }
+  res.status(500).send({ message: 'Ошибка чтения файла' });
+});
 }
 
 
@@ -33,4 +40,12 @@ module.exports.deleteCard = (req, res) => Card.findByIdAndRemove(req.params._id)
     return res.status(404).send({ message: 'Нет карточки с таким id' });
   }
   return res.status(200).send(card);
-}).catch(() => res.status(500).send(err));
+}).catch((err) => {
+  if (err.name === 'ValidationError') {
+    const errorList = Object.keys(err.errors);
+    const messages = errorList.map((item) => err.errors[item].message);
+    res.status(400).send({ message: `Ошибка валидации: ${messages.join(' ')}` });
+  } else {
+    res.status(500).send({ message: 'Ошибка чтения файла' });
+  }
+});

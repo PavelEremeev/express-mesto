@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const validator = require('../utils/validator')
 
 const cardSchema = new Schema({
   name: {
@@ -11,9 +10,13 @@ const cardSchema = new Schema({
   link: {
     type: String,
     required: true,
-    // validate: {
-    //   validator
-    // }
+    validate: {
+      validator(v) {
+        // eslint-disable-next-line no-useless-escape
+        return /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(v);
+      },
+      message: 'Введите ссылку',
+    },
   },
   owner: {
     type: Schema.Types.ObjectId,
