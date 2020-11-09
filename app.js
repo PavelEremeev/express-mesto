@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const path = require('path');
 const usersRoutes = require('./routes/usersRouter.js');
-const cardsRoutes = require('./routes/cardsRouter.js');
+const cardsRouter = require('./routes/cards.js');
 const unknownRoute = require('./routes/unknown.js');
 
 
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', usersRoutes);
-app.use('/', cardsRoutes);
+app.use('/', cardsRouter);
 app.use('/', unknownRoute);
 
 // app.get('/', (req, res) => {
