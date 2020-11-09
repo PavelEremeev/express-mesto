@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const path = require('path');
-const usersRoutes = require('./routes/usersRouter.js');
+const usersRouter = require('./routes/users.js');
 const cardsRouter = require('./routes/cards.js');
 const unknownRoute = require('./routes/unknown.js');
 
@@ -31,12 +31,9 @@ app.use((req, res, next) => {
 })
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', usersRoutes);
+app.use('/', usersRouter);
 app.use('/', cardsRouter);
 app.use('/', unknownRoute);
 
-// app.get('/', (req, res) => {
-//   res.send('hello :)');
-// });
 
 app.listen(PORT, () => console.log(`Server is running on PORT:${PORT}`));
