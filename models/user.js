@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-
 const userSchema = new Schema({
   name: {
     type: String,
@@ -18,7 +17,7 @@ const userSchema = new Schema({
   about: {
     type: String,
     required: true,
-    minlength: 8,
+    minlength: 2,
     maxlength: 30,
     validate: {
       validator(v) {
@@ -39,7 +38,7 @@ const userSchema = new Schema({
       },
       message: 'Введите ссылку',
     },
-  }
-})
+  },
+});
 
-module.exports = model('user', userSchema)
+module.exports = model('user', userSchema);
